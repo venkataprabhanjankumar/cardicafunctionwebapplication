@@ -2,3 +2,4 @@
   <input type="file" name ="echo_video" accept=".avi,.mp4" (change)="handleFile($event)" required>
   <input type="submit">
 </form>
+<p *ngIf="isdisplay">{{result}}</p>

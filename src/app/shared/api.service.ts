@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class ApiService {
   constructor(private httpClient: HttpClient) { }
-  api = "https://cardiacfunction.herokuapp.com/getresult"
+  api = "https://127.0.0.1:8000/getresult"
   getResult(formData: FormData): Observable<any>{
     return this.httpClient.post(this.api,formData)
   }

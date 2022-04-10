@@ -15,6 +15,9 @@ export class ResultsComponent implements OnInit {
 
   echo_video: File | null = null;
 
+  result : string = ''
+  isdisplay : boolean = false
+
   handleFile(event: any){
     this.echo_video = event.target.files[0]
   }
@@ -26,13 +29,19 @@ export class ResultsComponent implements OnInit {
       const fileName = this.echo_video.name;
       console.log(fileName)
       const formData = new FormData();
-      formData.append("echo_video", this.echo_video)
+      formData.append("echovideo", this.echo_video)
       this.api.getResult(formData).subscribe({
         next: (data: any)=>{
           console.log(data)
+          if(data.status == 'ok'){
+            this.result = 'Predicted Ejection Fraction : '+data.ejection_fraction
+          }
+          else{
+            this.result = "Error Occurred"
+          }
         },
         error: (err: Error)=>{console.log(err)},
-        complete: ()=>{console.log("Complete")}
+        complete: ()=>{console.log("Complete");this.isdisplay = true}
       })
     }
   }
